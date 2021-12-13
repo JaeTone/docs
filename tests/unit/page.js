@@ -337,13 +337,11 @@ describe('Page class', () => {
 
     test('permalinks for dotcom-only pages', async () => {
       const page = await Page.init({
-        relativePath:
-          'github/authenticating-to-github/troubleshooting-ssh/using-ssh-over-the-https-port.md',
+        relativePath: 'authentication/troubleshooting-ssh/using-ssh-over-the-https-port.md',
         basePath: path.join(__dirname, '../../content'),
         languageCode: 'en',
       })
-      const expectedPath =
-        '/en/github/authenticating-to-github/troubleshooting-ssh/using-ssh-over-the-https-port'
+      const expectedPath = '/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port'
       expect(
         page.permalinks.find((permalink) => permalink.pageVersion === nonEnterpriseDefaultVersion)
           .href
@@ -405,6 +403,7 @@ describe('Page class', () => {
       ])
     })
 
+    // Docs Engineering issue: 970
     it.skip('renders learning tracks that have been defined', async () => {
       // getLinkData.mockImplementation((guides) => { return guides })
       const guides = ['/path/guide1', '/path/guide2']
@@ -488,6 +487,7 @@ describe('Page class', () => {
       expect(page.includeGuides).toStrictEqual(['/path/guide1', '/path/guide2', '/path/guide3'])
     })
 
+    // Docs Engineering issue: 971
     it.skip('renders guides and topics', async () => {
       /* getLinkData.mockImplementation(() => {
         return [{
@@ -555,10 +555,11 @@ describe('Page class', () => {
   })
 
   describe('page.versions frontmatter', () => {
+    // Docs Engineering issue: 972
     test.skip('pages that apply to older enterprise versions', async () => {
       // There are none of these in the content at this time!
     })
-
+    // Docs Engineering issue: 972
     test.skip('pages that apply to newer enterprise versions', async () => {
       // There are none of these in the content at this time!
     })

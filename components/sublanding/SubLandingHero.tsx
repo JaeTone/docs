@@ -1,10 +1,12 @@
+import cx from 'classnames'
 import { Breadcrumbs } from '../Breadcrumbs'
 import { useProductSubLandingContext } from 'components/context/ProductSubLandingContext'
 import { ArrowRightIcon, StarFillIcon } from '@primer/octicons-react'
 import { useTranslation } from 'components/hooks/useTranslation'
 import { Link } from 'components/Link'
-import { TruncateLines } from 'components/TruncateLines'
+import { TruncateLines } from 'components/ui/TruncateLines'
 import { Lead } from 'components/ui/Lead'
+import styles from './SubLandingHero.module.scss'
 
 export const SubLandingHero = () => {
   const { title, intro, featuredTrack } = useProductSubLandingContext()
@@ -14,7 +16,7 @@ export const SubLandingHero = () => {
   const guideItems = featuredTrack?.guides?.map((guide) => (
     <li className="px-2 d-flex flex-shrink-0" key={guide.href} style={{ width: cardWidth }}>
       <Link
-        href={`${guide.href}?learn=${featuredTrack.trackName}`}
+        href={`${guide.href}?learn=${featuredTrack.trackName}&learnProduct=${featuredTrack.trackProduct}`}
         className="d-inline-block Box p-5 color-bg-primary color-border-primary no-underline"
       >
         <div className="d-flex flex-justify-between flex-items-center">
@@ -32,7 +34,7 @@ export const SubLandingHero = () => {
             {t('guide_types')[guide.page?.type || '']}
           </div>
         </div>
-        <h3 className="font-weight-semibold my-4 color-text-primary">{guide.title}</h3>
+        <h3 className="text-semibold my-4 color-text-primary">{guide.title}</h3>
         <TruncateLines maxLines={8} className="color-text-secondary f5 my-4">
           <span dangerouslySetInnerHTML={{ __html: guide.intro }} />
         </TruncateLines>
@@ -63,13 +65,13 @@ export const SubLandingHero = () => {
                 >
                   <StarFillIcon size={24} />
                 </div>
-                <h3 className="font-weight-semibold my-4">{featuredTrack.title}</h3>
+                <h3 className="text-semibold my-4">{featuredTrack.title}</h3>
                 <div className="f5 my-4">{featuredTrack.description}</div>
                 {featuredTrack.guides && (
                   <Link
                     className="d-inline-flex flex-items-center flex-justify-center btn px-4 py-2 f5 no-underline text-bold"
                     role="button"
-                    href={`${featuredTrack.guides[0].href}?learn=${featuredTrack.trackName}`}
+                    href={`${featuredTrack.guides[0].href}?learn=${featuredTrack.trackName}&learnProduct=${featuredTrack.trackProduct}`}
                   >
                     {t(`start_path`)}
                     <ArrowRightIcon size={20} className="ml-2" />
@@ -79,8 +81,12 @@ export const SubLandingHero = () => {
             </li>
             {guideItems}
           </ul>
-          <div className="position-absolute top-0 bottom-0 left-0 ml-3 pl-3 fade-tertiary-left"></div>
-          <div className="position-absolute top-0 bottom-0 right-0 mr-3 pr-3 fade-tertiary-right"></div>
+          <div
+            className={cx('position-absolute top-0 bottom-0 left-0 ml-3 pl-3', styles.fadeLeft)}
+          ></div>
+          <div
+            className={cx('position-absolute top-0 bottom-0 right-0 mr-3 pr-3', styles.fadeRight)}
+          ></div>
         </div>
       )}
     </div>

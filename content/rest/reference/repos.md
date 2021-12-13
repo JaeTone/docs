@@ -178,7 +178,7 @@ You can communicate that a transient environment no longer exists by setting its
 {% ifversion fpt or ghes > 3.1 or ghae-next %}
 ## Environments
 
-The Environments API allows you to create, configure, and delete environments. For more information about environments, see "[Environments](/actions/reference/environments)." To manage environment secrets, see "[Secrets](/rest/reference/actions#secrets)."
+The Environments API allows you to create, configure, and delete environments. For more information about environments, see "[Using environments for deployment](/actions/deployment/using-environments-for-deployment)." To manage environment secrets, see "[Secrets](/rest/reference/actions#secrets)."
 
 {% for operation in currentRestOperations %}
   {% if operation.subcategory == 'environments' %}{% include rest_operation %}{% endif %}
@@ -206,6 +206,16 @@ Use the API endpoint for adding a collaborator. For more information, see "[Add 
 {% for operation in currentRestOperations %}
   {% if operation.subcategory == 'invitations' %}{% include rest_operation %}{% endif %}
 {% endfor %}
+
+{% ifversion fpt or ghae or ghes > 3.2 %}
+
+## Git LFS
+
+{% for operation in currentRestOperations %}
+  {% if operation.subcategory == 'lfs' %}{% include rest_operation %}{% endif %}
+{% endfor %}
+
+{% endif %}
 
 ## Merging
 
